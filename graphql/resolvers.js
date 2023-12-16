@@ -29,7 +29,7 @@ const resolvers = {
         if (!book) {
           throw new Error("Book not found");
         }
-        await book.remove();
+        await Book.deleteOne({ _id: id });
         return book;
       } catch (err) {
         throw new Error(err.message);
