@@ -10,8 +10,16 @@ const resolvers = require("./graphql/resolvers");
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// Permissive CORS configuration
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "*",
+    credentials: true,
+  })
+);
+
 app.use(express.static("static"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
