@@ -1,0 +1,157 @@
+swagger: "2.0"
+info:
+  title: Book Management REST API
+  version: "1.0.0"
+schemes:
+  - https
+produces:
+  - application/json
+host: "rest-api-21hv55msi11mu.apigateway.the-final-project-408015.cloud.goog"
+x-google-endpoints:
+  - name: "rest-api-21hv55msi11mu.apigateway.the-final-project-408015.cloud.goog"
+    allowCors: True
+
+paths:
+  /getAllBooks:
+    get:
+      summary: Get all books
+      operationId: getAllBooks
+      responses:
+        200:
+          description: List of all books
+      x-google-backend:
+        address: https://getallbooks-m4slaxoduq-uc.a.run.app
+
+  /getBook:
+    get:
+      summary: Get a specific book
+      operationId: getBook
+      parameters:
+        - in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        200:
+          description: Details of a specific book
+      x-google-backend:
+        address: https://getbook-m4slaxoduq-uc.a.run.app
+
+  /createBook:
+    post:
+      summary: Create a new book
+      operationId: createBook
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: book
+          description: Book to add
+          schema:
+            $ref: "#/definitions/Book"
+      responses:
+        200:
+          description: Book successfully created
+      x-google-backend:
+        address: https://books-backend-m4slaxoduq-uc.a.run.app/api/books
+
+  /updateBook:
+    put:
+      summary: Update an existing book
+      operationId: updateBook
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: book
+          description: Book object that needs to be updated
+          schema:
+            $ref: "#/definitions/Book"
+      responses:
+        200:
+          description: Book successfully updated
+      x-google-backend:
+        address: https://books-backend-m4slaxoduq-uc.a.run.app/api/books
+
+  /login:
+    post:
+      summary: User login
+      operationId: login
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          description: User login credentials
+          schema:
+            $ref: "#/definitions/UserCredentials"
+      responses:
+        200:
+          description: User successfully logged in
+      x-google-backend:
+        address: https://books-backend-m4slaxoduq-uc.a.run.app/api/users/login
+
+  /signup:
+    post:
+      summary: User signup
+      operationId: signup
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: user
+          description: New user details
+          schema:
+            $ref: "#/definitions/NewUser"
+      responses:
+        200:
+          description: User successfully signed up
+      x-google-backend:
+        address: https://books-backend-m4slaxoduq-uc.a.run.app/api/users/signup
+
+definitions:
+  Book:
+    type: object
+    required:
+      - title
+      - author
+      - cover
+      - summary
+    properties:
+      title:
+        type: string
+      author:
+        type: string
+      cover:
+        type: string
+      summary:
+        type: string
+
+  UserCredentials:
+    type: object
+    required:
+      - username
+      - password
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+
+  NewUser:
+    type: object
+    required:
+      - username
+      - email
+      - password
+    properties:
+      username:
+        type: string
+      email:
+        type: string
+      password:
+        type: string

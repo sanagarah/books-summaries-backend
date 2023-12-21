@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.0.0",
+    "apollo-server-cloud-functions": "^3.13.0",
+    "cors": "^2.8.5",
+    "mongoose": "^8.0.0",
+    "dotenv": "^16.3.1"
+  }
+}
